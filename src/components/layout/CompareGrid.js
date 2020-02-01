@@ -7,7 +7,8 @@ const GridContainer = styled.div`
 
 const GridRow = styled.div`
   display: flex;
-  border-top: ${props => (props.noBorder ? 'none' : '1px solid #ccc')};
+  border-top: ${props =>
+    props.noBorder ? 'none' : `1px solid ${props.theme.colors.tableBorder}`};
   align-items: stretch;
 `
 
@@ -19,7 +20,7 @@ const GridCell = styled.div.attrs(props => ({
   font-weight: ${props => props.fontWeight};
 
   &:first-child {
-    border-right: 1px solid #ccc;
+    border-right: ${props => `1px solid ${props.theme.colors.tableBorder}`};
   }
 
   &:last-child {

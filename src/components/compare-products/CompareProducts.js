@@ -6,22 +6,22 @@ import {
   CompareGridCell,
   CompareGridBadgesCell,
   COMPARE_GRID_CELL_TYPES
-} from './layout/CompareGrid'
+} from '../layout/CompareGrid'
 import ProductsFilter from './ProductsFilter'
 import ProductHeader from './ProductHeader'
-import { FIELDS_COMPARE_EXCLUDE } from '../constants/config'
+import { FIELDS_COMPARE_EXCLUDE } from '../../constants/config'
 
 const CompareContainer = styled.div`
   text-align: left;
   padding-bottom: 30px;
-  border-bottom: 4px solid #005ca9;
+  border-bottom: ${props => `4px solid ${props.theme.colors.blue}`};
 `
 
 const CompareHeader = styled.h1`
-  color: #005ca9;
-  font-family: 'Nunito Sans', sans-serif;
+  color: ${props => props.theme.colors.blue};
+  font-family: ${props => props.theme.fonts.headers}
   font-weight: 700;
-  font-size: 2rem;
+  font-size: ${props => props.theme.fontSizes.extraLarge};
 `
 
 const BADGES_DATA_KEY = 'badges'

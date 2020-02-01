@@ -4,12 +4,8 @@ import ReactDOM from 'react-dom'
 import { createGlobalStyle } from 'styled-components'
 import { Provider } from 'react-redux'
 import { library } from '@fortawesome/fontawesome-svg-core'
-import {
-  faTrashAlt,
-  faCheckSquare,
-  faSquare
-} from '@fortawesome/free-solid-svg-icons'
-import './index.css'
+import { faTrashAlt, faCheckSquare } from '@fortawesome/free-solid-svg-icons'
+import { faSquare } from '@fortawesome/free-regular-svg-icons'
 import Store from './store'
 import App from './components/pages/App'
 import * as serviceWorker from './serviceWorker'

@@ -1,13 +1,14 @@
 import React, { Fragment } from 'react'
 import { connect } from 'react-redux'
 import styled from 'styled-components'
-import { showProduct, hideProduct } from '../actions/productActions'
+import { showProduct, hideProduct } from '../../actions/productActions'
+import StyledCheckbox from '../user-controls/StyledCheckbox'
 
 const FilterHeader = styled.h2`
-  color: #005ca9;
-  font-family: 'Nunito Sans', sans-serif;
-  font-weight: 700;
-  font-size: 1.3rem;
+  color:  ${props => props.theme.colors.blue};
+  font-family: ${props => props.theme.fonts.headers}
+  font-weight: ${props => props.theme.fontWeights.bold};
+  font-size: ${props => props.theme.fontSizes.large};
 `
 
 const FiltersList = styled.ul`
@@ -18,14 +19,9 @@ const FiltersList = styled.ul`
 
 const FiltersListItem = styled.li`
   position: relative;
-  font-weight: bold;
-  padding-left: 30px;
-  line-height: 1.5rem;
-
-  input[type='checkbox'] {
-    position: absolute;
-    left: 0;
-  }
+  font-weight: ${props => props.theme.fontWeights.bold};
+  padding: 0 0 1.5rem 30px;
+  line-height: 1.2rem;
 `
 
 function ProductFilter({
@@ -48,12 +44,11 @@ function ProductFilter({
       <FiltersList>
         {products.map(p => (
           <FiltersListItem key={p.Artikelnummer}>
-            <input
-              type="checkbox"
+            <StyledCheckbox
               checked={!filteredProducts.includes(p.Artikelnummer)}
               onChange={e => handleChange(p.Artikelnummer)}
+              text={p.name}
             />
-            {p.name}
           </FiltersListItem>
         ))}
       </FiltersList>

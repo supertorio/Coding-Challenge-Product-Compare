@@ -7,8 +7,8 @@ import {
   getProducts,
   getFilteredProducts
 } from '../../reducers/index-reducer'
-import CompareProducts from '../CompareProducts'
-import './App.css'
+import CompareProducts from '../compare-products/CompareProducts'
+import Theme from '../theme'
 
 const AppContainer = styled.div`
   max-width: 1400px;
@@ -22,15 +22,17 @@ function App({ loading, products, filteredProducts, loadProducts }) {
   }, [loadProducts])
 
   return (
-    <AppContainer>
-      {loading && <div>'Loading'</div>}
-      {products.size > 0 && (
-        <CompareProducts
-          products={products}
-          filteredProducts={filteredProducts}
-        />
-      )}
-    </AppContainer>
+    <Theme>
+      <AppContainer>
+        {loading && <div>'Loading'</div>}
+        {products.size > 0 && (
+          <CompareProducts
+            products={products}
+            filteredProducts={filteredProducts}
+          />
+        )}
+      </AppContainer>
+    </Theme>
   )
 }
 
