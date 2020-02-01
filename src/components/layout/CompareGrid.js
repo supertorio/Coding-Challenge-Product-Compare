@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState } from 'react'
 import styled from 'styled-components'
 
 const GridContainer = styled.div`
@@ -10,6 +10,8 @@ const GridRow = styled.div`
   border-top: ${props =>
     props.noBorder ? 'none' : `1px solid ${props.theme.colors.tableBorder}`};
   align-items: stretch;
+  background-color: ${props =>
+    props.highlightRow ? props.theme.colors.tableBorder : 'tranparent'};
 `
 
 const GridCell = styled.div.attrs(props => ({
@@ -47,9 +49,22 @@ export const CompareGrid = props => (
   <GridContainer>{props.children}</GridContainer>
 )
 
-export const CompareGridRow = props => (
-  <GridRow noBorder={props.noBorder || false}>{props.children}</GridRow>
-)
+export const CompareGridRow = ({ noBorder, allowHighlight, children }) => {
+  const [hovered, setHovered] = useState(false)
+  const [selected, setSelected] = useState(false)
+
+  return (
+    <GridRow
+      onMouseEnter={() => setHovered(true)}
+      onMouseLeave={() => setHovered(false)}
+      onClick={() => setSelected(!selected)}
+      noBorder={noBorder || false}
+      highlightRow={allowHighlight && (hovered || selected)}
+    >
+      {children}
+    </GridRow>
+  )
+}
 
 // Converts the type prop value type into a prop key for the styled component
 export const CompareGridCell = props => (

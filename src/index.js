@@ -4,7 +4,11 @@ import ReactDOM from 'react-dom'
 import { createGlobalStyle } from 'styled-components'
 import { Provider } from 'react-redux'
 import { library } from '@fortawesome/fontawesome-svg-core'
-import { faTrashAlt, faCheckSquare } from '@fortawesome/free-solid-svg-icons'
+import {
+  faTrashAlt,
+  faCheckSquare,
+  faSpinner
+} from '@fortawesome/free-solid-svg-icons'
 import { faSquare } from '@fortawesome/free-regular-svg-icons'
 import Store from './store'
 import App from './components/pages/App'
@@ -17,7 +21,7 @@ const GlobalStyle = createGlobalStyle`
   }
 `
 
-library.add(faTrashAlt, faCheckSquare, faSquare)
+library.add(faTrashAlt, faCheckSquare, faSquare, faSpinner)
 
 ReactDOM.render(
   <Provider store={Store}>

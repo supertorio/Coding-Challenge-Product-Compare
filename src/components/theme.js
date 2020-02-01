@@ -5,7 +5,7 @@ const theme = {
   colors: {
     default: '#000',
     blue: '#005ca9;',
-    tableBorder: '#ccc',
+    tableBorder: '#e7e7e7',
     darkGrey: '#676767'
   },
   fonts: {

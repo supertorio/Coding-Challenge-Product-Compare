@@ -7,6 +7,7 @@ import {
   getProducts,
   getFilteredProducts
 } from '../../reducers/index-reducer'
+import LoadingIndicator from '../LoadingIndicator'
 import CompareProducts from '../compare-products/CompareProducts'
 import Theme from '../theme'
 
@@ -24,7 +25,7 @@ function App({ loading, products, filteredProducts, loadProducts }) {
   return (
     <Theme>
       <AppContainer>
-        {loading && <div>'Loading'</div>}
+        {loading && <LoadingIndicator message="Loading Products" />}
         {products.size > 0 && (
           <CompareProducts
             products={products}

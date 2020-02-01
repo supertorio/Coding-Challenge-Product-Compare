@@ -55,7 +55,7 @@ function CompareProducts({ products, filteredProducts }) {
         {displayedProducts.size} producten vergelijken
       </CompareHeader>
       <CompareGrid>
-        <CompareGridRow>
+        <CompareGridRow allowHighlight={false}>
           <CompareGridCell type={COMPARE_GRID_CELL_TYPES.ROW_HEADER}>
             <ProductsFilter
               products={products}
@@ -74,7 +74,11 @@ function CompareProducts({ products, filteredProducts }) {
         {compareFields.map(f => {
           const keurMarkRow = f === BADGES_DATA_KEY
           return (
-            <CompareGridRow noBorder={keurMarkRow} key={f}>
+            <CompareGridRow
+              noBorder={keurMarkRow}
+              allowHighlight={!keurMarkRow}
+              key={f}
+            >
               <CompareGridCell
                 type={COMPARE_GRID_CELL_TYPES.ROW_HEADER}
                 productCount={displayedProducts.size}
