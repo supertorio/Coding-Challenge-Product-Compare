@@ -1,5 +1,5 @@
 import { combineReducers } from 'redux-immutable'
-import products, * as productsSelector from './products-reducer'
+import products, * as productsSelectors from './products-reducer'
 
 const rootReducer = combineReducers({
   products
@@ -9,6 +9,8 @@ export default rootReducer
 
 // Selector Pattern Accessors
 export const getProductsLoading = state =>
-  productsSelector.selectProductsLoading(state.get('products'))
+  productsSelectors.selectProductsLoading(state.get('products'))
 export const getProducts = state =>
-  productsSelector.selectProducts(state.get('products'))
+  productsSelectors.selectProducts(state.get('products'))
+export const getFilteredProducts = state =>
+  productsSelectors.selectFilteredProducts(state.get('products'))

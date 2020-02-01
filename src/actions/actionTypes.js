@@ -1,3 +1,7 @@
 // Application Action IDs
 export const UPDATE_LOAD_PRODUCTS_STATUS = 'UPDATE_LOAD_PRODUCTS_STATUS'
 export const LOAD_PRODUCTS = 'LOAD_PRODUCTS'
+
+export const SHOW_PRODUCT = 'SHOW_PRODUCT'
+export const HIDE_PRODUCT = 'HIDE_PRODUCT'
+export const REMOVE_PRODUCT = 'REMOVE_PRODUCT'
