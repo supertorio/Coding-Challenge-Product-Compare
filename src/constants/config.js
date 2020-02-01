@@ -16,3 +16,7 @@ export const FIELDS_COMPARE_EXCLUDE = [
   'display',
   'atp'
 ]
+
+export const BADGES_DATA_KEY = 'badges'
+
+export const API_HOST = 'http://5c35e7f96fc11c0014d32fcd.mockapi.io/'

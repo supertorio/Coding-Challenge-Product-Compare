@@ -1,9 +1,11 @@
-const PRODUCTS_ENDPOINT =
-  'http://5c35e7f96fc11c0014d32fcd.mockapi.io/compare/products'
+import { API_HOST } from '../constants/config'
 
+// Fetch API is polyfilled for IE11
+// Wrapped in a promise to keep the provider api to
+// clean success or fail responses.
 export const fetchProducts = () => {
   return new Promise((resolve, reject) => {
-    fetch(PRODUCTS_ENDPOINT)
+    fetch(`${API_HOST}compare/products`)
       .then(response => {
         return response.json()
       })

@@ -10,7 +10,7 @@ import {
 } from '../layout/CompareGridCell'
 import ProductsFilter from './ProductsFilter'
 import ProductHeader from './ProductHeader'
-import { FIELDS_COMPARE_EXCLUDE } from '../../constants/config'
+import { FIELDS_COMPARE_EXCLUDE, BADGES_DATA_KEY } from '../../constants/config'
 
 const CompareContainer = styled.div`
   text-align: left;
@@ -29,10 +29,15 @@ const CompareHeader = styled.h1`
   }
 `
 
-const BADGES_DATA_KEY = 'badges'
-
 function CompareProducts({ products, filteredProducts }) {
+  // When data changes, we generate a new list of sorted
+  // compare fields in the side effect handler below.
   const [compareFields, setCompareFields] = useState([])
+
+  // Geneneral product management -
+  // Products and visable products (article number list) are treated
+  // separately (managed in the redux store) and resolved together to
+  // determine which products are shown in the table.
   const [displayedProducts, setDisplayedProducts] = useState([])
 
   useEffect(() => {

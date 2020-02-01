@@ -8,7 +8,7 @@ export const loadProducts = () => dispatch => {
       dispatch({ type: actionTypes.LOAD_PRODUCTS, products: results.products })
     })
     .catch(e => {
-      //TODO: Handle Errors
+      //TODO: Surface error to user
       dispatch({
         type: actionTypes.UPDATE_LOAD_PRODUCTS_STATUS,
         loading: false
