@@ -1,12 +1,13 @@
 import React, { useEffect, useState } from 'react'
 import styled from 'styled-components'
+import CompareGrid from '../layout/CompareGrid'
+import CompareGridRow from '../layout/CompareGridRow'
 import {
-  CompareGrid,
-  CompareGridRow,
-  CompareGridCell,
   CompareGridBadgesCell,
-  COMPARE_GRID_CELL_TYPES
-} from '../layout/CompareGrid'
+  CompareGridDataCell,
+  CompareGridRowHeaderCell,
+  CompareGridColumnHeaderCell
+} from '../layout/CompareGridCell'
 import ProductsFilter from './ProductsFilter'
 import ProductHeader from './ProductHeader'
 import { FIELDS_COMPARE_EXCLUDE } from '../../constants/config'
@@ -22,6 +23,10 @@ const CompareHeader = styled.h1`
   font-family: ${props => props.theme.fonts.headers}
   font-weight: 700;
   font-size: ${props => props.theme.fontSizes.extraLarge};
+
+  @media (max-width: 900px) {
+    text-align: center;
+  }
 `
 
 const BADGES_DATA_KEY = 'badges'
@@ -56,19 +61,19 @@ function CompareProducts({ products, filteredProducts }) {
       </CompareHeader>
       <CompareGrid>
         <CompareGridRow allowHighlight={false}>
-          <CompareGridCell type={COMPARE_GRID_CELL_TYPES.ROW_HEADER}>
+          <CompareGridRowHeaderCell>
             <ProductsFilter
               products={products}
               filteredProducts={filteredProducts}
             />
-          </CompareGridCell>
+          </CompareGridRowHeaderCell>
           {displayedProducts.map(p => (
-            <CompareGridCell
+            <CompareGridColumnHeaderCell
               key={p.Artikelnummer}
               productCount={displayedProducts.size}
             >
               <ProductHeader product={p} />
-            </CompareGridCell>
+            </CompareGridColumnHeaderCell>
           ))}
         </CompareGridRow>
         {compareFields.map(f => {
@@ -79,27 +84,25 @@ function CompareProducts({ products, filteredProducts }) {
               allowHighlight={!keurMarkRow}
               key={f}
             >
-              <CompareGridCell
-                type={COMPARE_GRID_CELL_TYPES.ROW_HEADER}
-                productCount={displayedProducts.size}
-              >
+              <CompareGridRowHeaderCell productCount={displayedProducts.size}>
                 {keurMarkRow ? 'Keurmark' : f}
-              </CompareGridCell>
+              </CompareGridRowHeaderCell>
               {displayedProducts.map(p => {
                 return keurMarkRow ? (
                   <CompareGridBadgesCell
                     key={`${p.Artikelnummer}_${f}`}
                     badges={p[f]}
                     productCount={displayedProducts.size}
+                    productName={p.name}
                   />
                 ) : (
-                  <CompareGridCell
+                  <CompareGridDataCell
                     key={`${p.Artikelnummer}_${f}`}
-                    type={COMPARE_GRID_CELL_TYPES.DATA_CELL}
                     productCount={displayedProducts.size}
+                    productName={p.name}
                   >
                     {p[f]}
-                  </CompareGridCell>
+                  </CompareGridDataCell>
                 )
               })}
             </CompareGridRow>

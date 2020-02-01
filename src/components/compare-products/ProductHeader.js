@@ -8,11 +8,26 @@ const Container = styled.div`
   border-bottom: ${props => `1px solid ${props.theme.colors.tableBorder}`};
   padding-bottom: 15px;
   margin-bottom: 30px;
+
+  @media (max-width: 900px) {
+    &:after {
+      content: '.';
+      visibility: hidden;
+      display: block;
+      height: 0;
+      clear: both;
+    }
+  }
 `
 
 const ProductImage = styled.img`
   width: 100%;
   max-width: 240px;
+
+  @media (max-width: 900px) {
+    float: left;
+    max-width: 180px;
+  }
 `
 
 const ProductName = styled.h2`
@@ -45,6 +60,10 @@ const RemoveProductButton = styled.button`
 
   &:hover {
     color: ${props => props.theme.colors.default};
+  }
+
+  @media (max-width: 900px) {
+    margin-left: 10px;
   }
 `
 

@@ -1,92 +1,13 @@
-import React, { useState } from 'react'
+import React from 'react'
 import styled from 'styled-components'
 
 const GridContainer = styled.div`
   margin: 0 15px;
+  box-sizing: border-box;
 `
-
-const GridRow = styled.div`
-  display: flex;
-  border-top: ${props =>
-    props.noBorder ? 'none' : `1px solid ${props.theme.colors.tableBorder}`};
-  align-items: stretch;
-  background-color: ${props =>
-    props.highlightRow ? props.theme.colors.tableBorder : 'tranparent'};
-`
-
-const GridCell = styled.div.attrs(props => ({
-  fontWeight: props[COMPARE_GRID_CELL_TYPES.DATA_CELL] ? 800 : 500,
-  flexBasis: props[COMPARE_GRID_CELL_TYPES.ROW_HEADER]
-    ? `20%`
-    : `${80 / props.oneOfNum}%`
-}))`
-  flex: ${props => `0 1 ${props.flexBasis}`};
-  padding: 8px;
-  font-weight: ${props => props.fontWeight};
-
-  &:first-child {
-    border-right: ${props => `1px solid ${props.theme.colors.tableBorder}`};
-  }
-
-  &:last-child {
-    padding-right: 0;
-  }
-`
-
-const Badge = styled.img`
-  width: 30px;
-  margin-right: 5px;
-`
-
-export const COMPARE_GRID_CELL_TYPES = {
-  ROW_HEADER: 'rowHeader',
-  COL_HEADER: 'colHeader',
-  DATA_CELL: 'dataCell',
-  BADGES_CELL: 'badgesCell'
-}
 
 export const CompareGrid = props => (
   <GridContainer>{props.children}</GridContainer>
 )
 
-export const CompareGridRow = ({ noBorder, allowHighlight, children }) => {
-  const [hovered, setHovered] = useState(false)
-  const [selected, setSelected] = useState(false)
-
-  return (
-    <GridRow
-      onMouseEnter={() => setHovered(true)}
-      onMouseLeave={() => setHovered(false)}
-      onClick={() => setSelected(!selected)}
-      noBorder={noBorder || false}
-      highlightRow={allowHighlight && (hovered || selected)}
-    >
-      {children}
-    </GridRow>
-  )
-}
-
-// Converts the type prop value type into a prop key for the styled component
-export const CompareGridCell = props => (
-  <GridCell {...{ [props.type]: true }} oneOfNum={props.productCount}>
-    {props.children}
-  </GridCell>
-)
-
-/**
- * Specialty helper cell for rendering product badges
- * @param {obj} props
- */
-export const CompareGridBadgesCell = props => {
-  const cellContents = props.badges.split('|').map((b, i) => {
-    return <Badge key={i} src={b} alt="badge" />
-  })
-  return (
-    <GridCell
-      type={COMPARE_GRID_CELL_TYPES.BADGES_CELL}
-      oneOfNum={props.productCount}
-    >
-      {cellContents}
-    </GridCell>
-  )
-}
+export default CompareGrid
