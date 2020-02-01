@@ -51,17 +51,22 @@ function CompareProducts({ products, filteredProducts }) {
 
   return (
     <CompareContainer>
-      <CompareHeader>4 producten vergelijken</CompareHeader>
+      <CompareHeader>
+        {displayedProducts.size} producten vergelijken
+      </CompareHeader>
       <CompareGrid>
         <CompareGridRow>
-          <CompareGridCell>
+          <CompareGridCell type={COMPARE_GRID_CELL_TYPES.ROW_HEADER}>
             <ProductsFilter
               products={products}
               filteredProducts={filteredProducts}
             />
           </CompareGridCell>
           {displayedProducts.map(p => (
-            <CompareGridCell key={p.Artikelnummer}>
+            <CompareGridCell
+              key={p.Artikelnummer}
+              productCount={displayedProducts.size}
+            >
               <ProductHeader product={p} />
             </CompareGridCell>
           ))}
@@ -70,7 +75,10 @@ function CompareProducts({ products, filteredProducts }) {
           const keurMarkRow = f === BADGES_DATA_KEY
           return (
             <CompareGridRow noBorder={keurMarkRow} key={f}>
-              <CompareGridCell type={COMPARE_GRID_CELL_TYPES.ROW_HEADER}>
+              <CompareGridCell
+                type={COMPARE_GRID_CELL_TYPES.ROW_HEADER}
+                productCount={displayedProducts.size}
+              >
                 {keurMarkRow ? 'Keurmark' : f}
               </CompareGridCell>
               {displayedProducts.map(p => {
@@ -78,11 +86,13 @@ function CompareProducts({ products, filteredProducts }) {
                   <CompareGridBadgesCell
                     key={`${p.Artikelnummer}_${f}`}
                     badges={p[f]}
+                    productCount={displayedProducts.size}
                   />
                 ) : (
                   <CompareGridCell
                     key={`${p.Artikelnummer}_${f}`}
                     type={COMPARE_GRID_CELL_TYPES.DATA_CELL}
+                    productCount={displayedProducts.size}
                   >
                     {p[f]}
                   </CompareGridCell>

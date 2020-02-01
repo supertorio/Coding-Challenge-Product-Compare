@@ -13,9 +13,12 @@ const GridRow = styled.div`
 `
 
 const GridCell = styled.div.attrs(props => ({
-  fontWeight: props[COMPARE_GRID_CELL_TYPES.DATA_CELL] ? 800 : 500
+  fontWeight: props[COMPARE_GRID_CELL_TYPES.DATA_CELL] ? 800 : 500,
+  flexBasis: props[COMPARE_GRID_CELL_TYPES.ROW_HEADER]
+    ? `20%`
+    : `${80 / props.oneOfNum}%`
 }))`
-  flex: 0 1 20%;
+  flex: ${props => `0 1 ${props.flexBasis}`};
   padding: 8px;
   font-weight: ${props => props.fontWeight};
 
@@ -50,7 +53,9 @@ export const CompareGridRow = props => (
 
 // Converts the type prop value type into a prop key for the styled component
 export const CompareGridCell = props => (
-  <GridCell {...{ [props.type]: true }}>{props.children}</GridCell>
+  <GridCell {...{ [props.type]: true }} oneOfNum={props.productCount}>
+    {props.children}
+  </GridCell>
 )
 
 /**
@@ -62,7 +67,10 @@ export const CompareGridBadgesCell = props => {
     return <Badge key={i} src={b} alt="badge" />
   })
   return (
-    <GridCell type={COMPARE_GRID_CELL_TYPES.BADGES_CELL}>
+    <GridCell
+      type={COMPARE_GRID_CELL_TYPES.BADGES_CELL}
+      oneOfNum={props.productCount}
+    >
       {cellContents}
     </GridCell>
   )
