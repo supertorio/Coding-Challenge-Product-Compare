@@ -25,3 +25,7 @@ First, for setup, run `yarn install` or `npm install`
 To start the development server, run `yarn start` or `npm start`
 
 To build a production deploy of the project, run `yarn build` or `npm build`
+
+**FOR IE 11**  
+The development server is not supported in IE11, so you'll need to build the client to view it in browser. You can optionally use the serve package ```npm i serve -g``` to server the client locally: ```serve -s ./build/```
+
